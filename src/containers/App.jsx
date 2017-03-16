@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
-const Json = require('./home/config.json');
-console.log(Json);
-
 //component
 import Home from './home/Home';
 //store

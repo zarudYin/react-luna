@@ -23,8 +23,20 @@ class Home extends Component {
         {
           this.list.map(item => <ListItem key={item.id} data={item} />)
         }
+        <div onClick={this.add}>jia1</div>
+        <div>qwe</div>
       </div>
     );
+  }
+
+  add = () => {
+    this.list.push({
+      author:{
+        avatar_url: 'https://avatars.githubusercontent.com/u/2081487?v=3&s=120'
+      },
+      title: 'cheng gong de tian jia le yi ge',
+      id: Date.now()
+    });
   }
 
   componentDidMount() {

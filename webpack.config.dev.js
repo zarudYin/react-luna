@@ -5,7 +5,7 @@ const config = require('./webpack.config.js');
 
 module.exports = function (env) {
     return webpackMerge(config, {
-        devtool: 'cheap-module-source-map',
+        devtool: 'cheap-module-eval-source-map',
         plugins: [
             // 开启全局的模块热替换（HMR）
             new webpack.HotModuleReplacementPlugin(),
@@ -20,15 +20,17 @@ module.exports = function (env) {
             historyApiFallback: true,
             inline: true,
             stats: {
-                assets: true,
+                assets: false,
                 children: false,
                 chunks: false,
                 hash: false,
                 modules: false,
-                publicPath: false,
-                timings: true,
                 version: false,
+                publicPath: true,
+                timings: true,
                 warnings: true,
+                errors: true,
+                errorDetails: true,
                 colors: {
                     green: '\u001b[32m',
                 }

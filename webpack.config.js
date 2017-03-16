@@ -45,25 +45,24 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|woff|woff2|eot|ttf)$/,
-          loader: 'url-loader',
-          options: {
-            limit:8192,
-            name: '[name].[hash:8].[ext]'
-          }
-        
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: '[name].[hash:8].[ext]'
+        }
       },
       {
         test: /\.(gif|svg)$/,
-          loader: 'file-loader',
-          options: {
-            name:'[name].[hash:8].[ext]'
-          }
+        loader: 'file-loader',
+        options: {
+          name: '[name].[hash:8].[ext]'
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
-          loader: 'url-loader',
-          options: {
-            limit:8192
+        loader: 'url-loader',
+        options: {
+          limit: 8192
         }
       }
     ],
