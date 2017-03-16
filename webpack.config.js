@@ -7,51 +7,64 @@ const sourcePath = path.join(__dirname, 'src');
 const isProd = false;
 
 module.exports = {
-  devtool: 'cheap-module-source-map',
   context: sourcePath,
   entry: {
     app: './index.js',
-    common: ['mobx-react', 'mobx', 'react-router-dom', 'react', 'react-dom']
+    vender: ['mobx-react', 'mobx', 'react-router-dom', 'react', 'react-dom']
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].bundle.js',
-    publicPath: './'
+    filename: '[name].js',
+    publicPath: '/'
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader'
-        })
-      },
-      {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          use: ["css-loader", "less-loader"]
-        })
-      },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
       },
       {
+        test: /\.(css|less)$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            'postcss-loader',
+            'less-loader',
+          ]
+        })
+      },
+      {
         test: /\.json$/,
         use: 'json-loader'
       },
       {
-        test: /\.(png|jpg)$/,
-        use: 'url-loader?limit=8192&name=[md5:hash:base64:10].[ext]'
+        test: /\.(png|jpg|woff|woff2|eot|ttf)$/,
+          loader: 'url-loader',
+          options: {
+            limit:8192,
+            name: '[name].[hash:8].[ext]'
+          }
+        
       },
       {
-        test: /\.gif$/,
-        use: 'file-loader?name=[name].[ext]'
+        test: /\.(gif|svg)$/,
+          loader: 'file-loader',
+          options: {
+            name:'[name].[hash:8].[ext]'
+          }
       },
       {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'url-loader?limit=8192&mimetype=image/svg+xml'
+        test: /\.(woff|woff2|eot|ttf)$/,
+          loader: 'url-loader',
+          options: {
+            limit:8192
+        }
       }
     ],
   },
@@ -68,34 +81,26 @@ module.exports = {
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './index.html' }),
-    new ExtractTextPlugin('bundle.css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      minChunks: 2,
-      filename: 'common.js'
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    historyApiFallback: true,
-    port: 3000,
-    compress: isProd,
-    inline: !isProd,
-    hot: !isProd,
-    stats: {
-      assets: true,
-      children: false,
-      chunks: false,
-      hash: false,
-      modules: false,
-      publicPath: false,
-      timings: true,
-      version: false,
-      warnings: true,
-      colors: {
-        green: '\u001b[32m',
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true
       }
-    },
-  }
+    }),
+    new ExtractTextPlugin('app.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vender',
+      minChunks: Infinity,
+      filename: 'vender.js'
+    })
+  ]
 };

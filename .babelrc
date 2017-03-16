@@ -1,10 +1,15 @@
 {
   "plugins": [
-    "babel-plugin-transform-runtime",
+    "transform-runtime",
     "transform-decorators-legacy"
   ],
   "presets": [
-    "es2015",
+    [
+      "es2015",
+      {
+        "modules": false // webpack现在已经支持原生的import语句了
+      }
+    ],
     "react",
     "stage-1"
   ],
