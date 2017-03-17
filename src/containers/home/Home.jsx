@@ -23,15 +23,16 @@ class Home extends Component {
         {
           this.list.map(item => <ListItem key={item.id} data={item} />)
         }
-        <div onClick={this.add}>jia1</div>
-        <div>qwe</div>
+        <div onClick={this.add}>加一行</div>
+        <div>123</div>
+        <img src={this.props.user.head} />
       </div>
     );
   }
 
   add = () => {
     this.list.push({
-      author:{
+      author: {
         avatar_url: 'https://avatars.githubusercontent.com/u/2081487?v=3&s=120'
       },
       title: 'cheng gong de tian jia le yi ge',

@@ -5,7 +5,36 @@ const config = require('./webpack.config.js');
 
 module.exports = function (env) {
     return webpackMerge(config, {
-        devtool: 'cheap-module-eval-source-map',
+        // devtool: 'cheap-module-source-map',           
+        devtool: 'cheap-module-eval-source-map',  
+        module: {
+            rules: [
+                {
+                    test: /\.(css|less)$/,
+                    use: [
+                        {
+                            loader: 'style-loader'    //通过HTML热更新,使css达到热更新
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                sourceMap: true,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        },
+                        {
+                            loader: 'less-loader',
+                            options: {
+                                sourceMap: true,
+                            }
+                        },
+                    ]
+                }
+            ]
+        },
         plugins: [
             // 开启全局的模块热替换（HMR）
             new webpack.HotModuleReplacementPlugin(),
@@ -20,7 +49,7 @@ module.exports = function (env) {
             historyApiFallback: true,
             inline: true,
             stats: {
-                assets: false,
+                assets: true,
                 children: false,
                 chunks: false,
                 hash: false,
@@ -30,10 +59,7 @@ module.exports = function (env) {
                 timings: true,
                 warnings: true,
                 errors: true,
-                errorDetails: true,
-                colors: {
-                    green: '\u001b[32m',
-                }
+                errorDetails: true
             },
         }
     })

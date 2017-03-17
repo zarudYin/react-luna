@@ -1,10 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const sourcePath = path.join(__dirname, 'src');
-const isProd = false;
 
 module.exports = {
   context: sourcePath,
@@ -25,26 +23,11 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        test: /\.(css|less)$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1
-              }
-            },
-            'postcss-loader',
-            'less-loader',
-          ]
-        })
-      },
-      {
         test: /\.json$/,
         use: 'json-loader'
       },
       {
-        test: /\.(png|jpg|woff|woff2|eot|ttf)$/,
+        test: /\.(png|jpg|jpeg|woff|woff2|eot|ttf)$/,
         loader: 'url-loader',
         options: {
           limit: 8192,
@@ -56,13 +39,6 @@ module.exports = {
         loader: 'file-loader',
         options: {
           name: '[name].[hash:8].[ext]'
-        }
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8192
         }
       }
     ],
@@ -77,6 +53,8 @@ module.exports = {
     alias: {  //指定路径的别名
       Utils: path.resolve(__dirname, 'src/utils'),
       Components: path.resolve(__dirname, 'src/components'),
+      Containers: path.resolve(__dirname, 'src/containers'),
+      Public: path.resolve(__dirname, 'public'),
     },
   },
   plugins: [
@@ -95,7 +73,6 @@ module.exports = {
         minifyURLs: true
       }
     }),
-    new ExtractTextPlugin('app.css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vender',
       minChunks: Infinity,
