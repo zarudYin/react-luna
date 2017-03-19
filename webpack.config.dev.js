@@ -5,6 +5,8 @@ const path = require('path');
 const config = require('./webpack.config.js');
 
 const PATH_DIST = path.join(__dirname, 'dist');
+const PATH_PUBLIC = path.join(__dirname, "public");
+const PATH_MOCK = path.join(__dirname, "mock");
 
 module.exports = function (env) {
     return webpackMerge(config, {
@@ -61,7 +63,7 @@ module.exports = function (env) {
             hot: true,
             port: 3000,
             compress: false,
-            contentBase: path.join(__dirname, "public"),
+            contentBase: [PATH_PUBLIC, PATH_MOCK],
             historyApiFallback: true,
             inline: true,
             stats: {
@@ -71,12 +73,19 @@ module.exports = function (env) {
                 hash: false,
                 modules: false,
                 version: false,
+                color: true,
                 publicPath: true,
                 timings: true,
                 warnings: true,
                 errors: true,
                 errorDetails: true
             },
+            // proxy: {
+            //     '/test/*': {
+            //         target: 'http://localhost',
+            //         secure: false
+            //     }
+            // }
         }
     })
 }

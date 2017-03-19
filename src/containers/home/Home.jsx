@@ -5,7 +5,7 @@ import { observable } from 'mobx';
 import './Home.less';
 import request, { BASE_URL } from '../../utils/request';
 
-const LIST_URL = `${BASE_URL}/topics`;
+const LIST_URL = `/data.json`;
 
 @inject((store) => {
   return {
@@ -46,11 +46,6 @@ class Home extends Component {
     await request({
       url: LIST_URL,
       noToken: true,
-      data: {
-        page: 1,
-        tab: '',
-        limit: 2,
-      }
     }).then((data) => {
       this.list = this.list.concat(data.data.data);
     })
