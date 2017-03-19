@@ -1,12 +1,20 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const config = require('./webpack.config.js');
+
+const PATH_DIST = path.join(__dirname, 'dist');
 
 module.exports = function (env) {
     return webpackMerge(config, {
         // devtool: 'cheap-module-source-map',           
-        devtool: 'cheap-module-eval-source-map',  
+        devtool: 'cheap-module-eval-source-map',
+        output: {
+            path: PATH_DIST,
+            filename: '[name].js',
+            publicPath: '/'
+        },
         module: {
             rules: [
                 {
@@ -36,6 +44,14 @@ module.exports = function (env) {
             ]
         },
         plugins: [
+            new HtmlWebpackPlugin({
+                template: './index.html'
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vender',
+                minChunks: Infinity,
+                filename: '[name].js'
+            }),
             // 开启全局的模块热替换（HMR）
             new webpack.HotModuleReplacementPlugin(),
             // 当模块热替换（HMR）时在浏览器控制台输出对用户更友好的模块名字信息

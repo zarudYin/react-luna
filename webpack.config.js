@@ -1,19 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const sourcePath = path.join(__dirname, 'src');
+const PATH_SRC = path.join(__dirname, 'src');
 
 module.exports = {
-  context: sourcePath,
+  context: PATH_SRC,
   entry: {
     app: './index.js',
     vender: ['mobx-react', 'mobx', 'react-router-dom', 'react', 'react-dom']
-  },
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js',
-    publicPath: '/'
   },
   module: {
     rules: [
@@ -46,7 +40,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     modules: [
-      sourcePath,
+      PATH_SRC,
       'node_modules',
     ],
     mainFiles: ['index', 'main'],
@@ -55,28 +49,11 @@ module.exports = {
       Components: path.resolve(__dirname, 'src/components'),
       Containers: path.resolve(__dirname, 'src/containers'),
       Public: path.resolve(__dirname, 'public'),
+      Assets: path.resolve(__dirname, 'src/assets'),
+      Stores: path.resolve(__dirname, 'src/stores'),
     },
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeRedundantAttributes: true,
-        useShortDoctype: true,
-        removeEmptyAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vender',
-      minChunks: Infinity,
-      filename: 'vender.js'
-    })
+
   ]
 };
