@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './containers/App';
 
 //css
-import './index.css';
+import 'Assets/css/normalize.css';
 
 ReactDOM.render(
   <App />,

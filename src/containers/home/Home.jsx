@@ -23,9 +23,7 @@ class Home extends Component {
         {
           this.list.map(item => <ListItem key={item.id} data={item} />)
         }
-        <div onClick={this.add}>加一行</div>
-        <div>123</div>
-        <img src={this.props.user.head} />
+        <div onClick={this.add} style={{ cursor: 'pointer' }}>加一行</div>
       </div>
     );
   }
@@ -33,7 +31,7 @@ class Home extends Component {
   add = () => {
     this.list.push({
       author: {
-        avatar_url: 'https://avatars.githubusercontent.com/u/2081487?v=3&s=120'
+        avatar_url: this.props.user.head
       },
       title: 'cheng gong de tian jia le yi ge',
       id: Date.now()

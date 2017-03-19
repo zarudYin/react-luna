@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
-const Head = require('Public/user-photo.png');
+const Head = require('Assets/img/user-photo.png');
 
 class User {
   @observable isLogin = false
