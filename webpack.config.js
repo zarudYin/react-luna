@@ -21,7 +21,7 @@ module.exports = {
         use: 'json-loader'
       },
       {
-        test: /\.(png|jpg|jpeg|woff|woff2|eot|ttf)$/,
+        test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'url-loader',
         options: {
           limit: 8192,
@@ -29,7 +29,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(gif|svg)$/,
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[hash:8].[ext]'
