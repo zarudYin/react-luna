@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config webpack.config.dev.js",
-    "build": "cross-env NODE_ENV=production webpack -p --config webpack.config.prod.js"
+    "build": "cross-env NODE_ENV=production webpack -p --progress --config webpack.config.prod.js"
   },
   "keywords": [
     "webpack2",
