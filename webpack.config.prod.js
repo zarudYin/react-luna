@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-var fs = require('fs-extra');
+const fs = require('fs-extra');
 const path = require('path');
 const config = require('./webpack.config.js');
 
@@ -73,10 +73,17 @@ module.exports = function (env) {
                 }
             }),
             new webpack.optimize.CommonsChunkPlugin({
-                names: ['vendor', 'manifest'],
-                minChunks: Infinity,
-                filename: '[name].[chunkhash:8].js'
+                names: ['vendor', 'manifest']
             }),
+            //webpack -p打出来的包会比UglifyJsPlugin小很多？？？
+            // new webpack.optimize.UglifyJsPlugin({
+            //     compress: {
+            //         warnings: false,
+            //     },
+            //     output: {
+            //         comments: false,
+            //     }
+            // }),
             new ExtractTextPlugin('app.[contenthash:8].css')
         ],
     })

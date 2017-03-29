@@ -7,7 +7,7 @@ module.exports = {
   context: PATH_SRC,
   entry: {
     app: './index.js',
-    vender: ['mobx-react', 'mobx', 'react-router-dom', 'react', 'react-dom']
+    vendor: ['mobx-react', 'mobx', 'react-router-dom', 'react', 'react-dom']
   },
   module: {
     rules: [
