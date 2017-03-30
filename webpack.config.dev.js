@@ -14,13 +14,13 @@ module.exports = function (env) {
         devtool: 'cheap-module-eval-source-map',
         output: {
             path: PATH_DIST,
-            filename: '[name].js',
+            filename: '[name].[hash:8].js',
             publicPath: '/'
         },
         module: {
             rules: [
                 {
-                    test: /\.(css|less)$/,
+                    test: /\.(css|scss)$/,
                     use: [
                         {
                             loader: 'style-loader'    //通过HTML热更新,使css达到热更新
@@ -36,7 +36,7 @@ module.exports = function (env) {
                             loader: 'postcss-loader'
                         },
                         {
-                            loader: 'less-loader',
+                            loader: 'sass-loader',
                             options: {
                                 sourceMap: true,
                             }
@@ -48,11 +48,6 @@ module.exports = function (env) {
         plugins: [
             new HtmlWebpackPlugin({
                 template: './index.html'
-            }),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vender',
-                minChunks: Infinity,
-                filename: '[name].js'
             }),
             // 开启全局的模块热替换（HMR）
             new webpack.HotModuleReplacementPlugin(),

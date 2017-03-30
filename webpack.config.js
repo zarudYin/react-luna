@@ -48,7 +48,6 @@ module.exports = {
       Utils: path.resolve(__dirname, 'src/utils'),
       Components: path.resolve(__dirname, 'src/components'),
       Containers: path.resolve(__dirname, 'src/containers'),
-      Public: path.resolve(__dirname, 'public'),
       Assets: path.resolve(__dirname, 'src/assets'),
       Stores: path.resolve(__dirname, 'src/stores'),
     },

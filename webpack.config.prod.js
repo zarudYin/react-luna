@@ -32,7 +32,7 @@ module.exports = function (env) {
         module: {
             rules: [
                 {
-                    test: /\.(css|less)$/,
+                    test: /\.(css|scss)$/,
                     use: ExtractTextPlugin.extract({
                         use: [
                             {
@@ -46,7 +46,7 @@ module.exports = function (env) {
                                 loader: 'postcss-loader'
                             },
                             {
-                                loader: 'less-loader',
+                                loader: 'sass-loader',
                                 options: {
                                     sourceMap: true,
                                 }
