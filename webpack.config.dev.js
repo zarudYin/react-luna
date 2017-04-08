@@ -10,8 +10,7 @@ const PATH_MOCK = path.join(__dirname, "mock");
 
 module.exports = function (env) {
     return webpackMerge(config, {
-        // devtool: 'cheap-module-source-map',           
-        devtool: 'cheap-module-eval-source-map',
+        devtool: 'cheap-module-source-map',
         output: {
             path: PATH_DIST,
             filename: '[name].[hash:8].js',
