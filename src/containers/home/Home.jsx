@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { observable } from 'mobx';
 
-import './Home.less';
+import './Home.scss';
 import request, { BASE_URL } from '../../utils/request';
 
 const LIST_URL = `/data.json`;
