@@ -23,7 +23,7 @@ module.exports = function (env) {
 
     return webpackMerge(config, {
         // devtool: 'source-map',
-        devtool: 'hidden-source-map',
+        devtool: false,
         output: {
             path: PATH_DIST,
             filename: '[name].[chunkhash:8].js',
