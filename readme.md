@@ -1,6 +1,6 @@
 ##  react-mobx-luna
 
-> 基于react的多页面脚手架
+> 基于webpack2的react脚手架
 
 
 
