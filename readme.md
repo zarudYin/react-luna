@@ -1,4 +1,4 @@
-##  react-mobx-luna
+##  react-luna
 
 > 基于webpack2的react脚手架
 
@@ -7,7 +7,7 @@
 ### 拷贝项目模板
 
 ```basic
-$ git clone https://github.com/zarudYin/react-mobx-luna.git
+$ git clone https://github.com/zarudYin/react-luna.git
 ```
 
 ### 安装依赖模块
